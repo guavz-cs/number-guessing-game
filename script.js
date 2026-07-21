@@ -3,8 +3,6 @@ const max = 100;
 let secretNumber = Math.floor(Math.random() * max) + 1;
 let userGuess;
 
-console.log(secretNumber);
-
 const input = document.getElementById("userGuess");
 const guessBtn = document.getElementById("submitGuess");
 const output = document.getElementById("message");
@@ -16,7 +14,6 @@ replayBtn.addEventListener("click", () => {
     input.value ="";
     output.textContent = "";
     secretNumber = Math.floor(Math.random() * max) + 1;
-    console.log(secretNumber);
 });
 
 guessBtn.addEventListener("click", () => {
