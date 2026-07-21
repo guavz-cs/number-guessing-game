@@ -1,10 +1,6 @@
 const max = 100;
 
-function generateSecretNumber() {
-    return Math.floor(Math.random() * max) + 1;
-}
-
-let secretNumber = generateSecretNumber();
+let secretNumber = Math.floor(Math.random() * max) + 1;
 let userGuess;
 
 console.log(secretNumber);
@@ -14,65 +10,33 @@ const guessBtn = document.getElementById("submitGuess");
 const output = document.getElementById("message");
 const replayBtn = document.getElementById("replay");
 
-function resetGame() {
+replayBtn.addEventListener("click", () => {
     guessBtn.disabled = false;
     replayBtn.disabled = true;
-    input.value = "";
+    input.value ="";
     output.textContent = "";
-    secretNumber = generateSecretNumber();
+    secretNumber = Math.floor(Math.random() * max) + 1;
     console.log(secretNumber);
-}
+});
 
-replayBtn.addEventListener("click", resetGame);
+guessBtn.addEventListener("click", () => {
+    userGuess = Number(input.value);
 
-function validateGuess(guess) {
-    if (Number.isNaN(guess) || guess < 1 || guess > max) {
-        return { valid: false, reason: "invalid" };
-    }
-    return { valid: true };
-}
-
-function checkGuess(guess) {
-    if (guess === secretNumber) return "correct";
-    if (guess > secretNumber) return "high";
-    return "low";
-}
-
-function displayMessage(result, guess) {
-    switch (result) {
-        case "invalid":
-            output.textContent = `Please enter a number between 1 and ${max}`;
-            break;
-        case "correct":
-            output.textContent = "Correct!";
-            break;
-        case "high":
-            output.textContent = `${guess} is Too High!`;
-            break;
-        case "low":
-            output.textContent = `${guess} is Too Low!`;
-            break;
-    }
-}
-
-function guessButtonClicked() {
-    const userGuess = Number(input.value);
-    const validation = validateGuess(userGuess);
-
-    if (!validation.valid) {
-        displayMessage(validation.reason);
-        input.value = "";
-        return;
-    }
-
-    const result = checkGuess(userGuess);
-    displayMessage(result, userGuess);
-
-    if (result === "correct") {
-        endGame();
+    if(userGuess < 1 || userGuess > max || Number.isNaN(userGuess)) {
+        output.textContent = "Please enter a number between 1 and 100";
+        input.value ="";
     } else {
-        input.value = "";
+        if(userGuess === secretNumber){
+            output.textContent = "Correct!";
+            guessBtn.disabled = true;
+            replayBtn.disabled = false;
+            userGuess.value = "";
+        } else if(userGuess > secretNumber) {
+            output.textContent = `${userGuess} is Too High!`;
+            input.value ="";
+        } else if(userGuess < secretNumber){
+            output.textContent = `${userGuess} is Too Low!`;
+            input.value ="";
+        }
     }
-}
-
-guessBtn.addEventListener("click", guessButtonClicked);
+});
