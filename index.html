@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Number Guessing Game</title>
-    </head>
+<head>
+    <title>Number Guessing Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-    <body>
+<body>
+
+    <div class="container">
+
         <h1>Number Guessing Game</h1>
 
         <p>Guess a number between 1 and 100</p>
 
-        <input type="number" id="userGuess">
+        <input
+            type="number"
+            id="userGuess"
+            placeholder="Enter your guess"
+        >
 
         <button id="submitGuess">Guess</button>
 
@@ -17,6 +25,9 @@
 
         <p id="message"></p>
 
-        <script src="script.js"></script>
-    </body>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
 </html>
